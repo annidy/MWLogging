@@ -63,7 +63,7 @@
 // statements except NOTICE and above.
 #ifndef MW_COMPILE_TIME_LOG_LEVEL
 	#ifdef NDEBUG
-		#define MW_COMPILE_TIME_LOG_LEVEL ASL_LEVEL_NOTICE
+		#define MW_COMPILE_TIME_LOG_LEVEL ASL_LEVEL_WARNING
 	#else
 		#define MW_COMPILE_TIME_LOG_LEVEL ASL_LEVEL_DEBUG
 	#endif
@@ -71,51 +71,60 @@
 
 #include <asl.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+    
+void _MWLog(int, NSString *, ...);
+    
+#ifdef __cplusplus
+}
+#endif
+
 #if MW_COMPILE_TIME_LOG_LEVEL >= ASL_LEVEL_EMERG
-void MWLogEmergency(NSString *format, ...);
+#define MWLogEmergency(...) _MWLog(ASL_LEVEL_EMERG, __VA_ARGS__)
 #else
 #define MWLogEmergency(...)
 #endif
-
+ 
 #if MW_COMPILE_TIME_LOG_LEVEL >= ASL_LEVEL_ALERT
-void MWLogAlert(NSString *format, ...);
+#define MWLogAlert(...) _MWLog(ASL_LEVEL_ALERT, __VA_ARGS__)
 #else
 #define MWLogAlert(...)
 #endif
-
+ 
 #if MW_COMPILE_TIME_LOG_LEVEL >= ASL_LEVEL_CRIT
-void MWLogCritical(NSString *format, ...);
+#define MWLogCritical(...) _MWLog(ASL_LEVEL_CRIT, __VA_ARGS__)
 #else
 #define MWLogCritical(...)
 #endif
-
+ 
 #if MW_COMPILE_TIME_LOG_LEVEL >= ASL_LEVEL_ERR
-void MWLogError(NSString *format, ...);
+#define MWLogError(...) _MWLog(ASL_LEVEL_ERR, __VA_ARGS__)
 #else
 #define MWLogError(...)
 #endif
-
+ 
 #if MW_COMPILE_TIME_LOG_LEVEL >= ASL_LEVEL_WARNING
-void MWLogWarning(NSString *format, ...);
+#define MWLogWarning(...) _MWLog(ASL_LEVEL_WARNING, __VA_ARGS__)
 #else
 #define MWLogWarning(...)
 #endif
-
+ 
 #if MW_COMPILE_TIME_LOG_LEVEL >= ASL_LEVEL_NOTICE
-void MWLogNotice(NSString *format, ...);
+#define MWLogNotice(...) _MWLog(ASL_LEVEL_NOTICE, __VA_ARGS__)
 #else
 #define MWLogNotice(...)
 #endif
-
+ 
 #if MW_COMPILE_TIME_LOG_LEVEL >= ASL_LEVEL_INFO
-void MWLogInfo(NSString *format, ...);
+#define MWLogInfo(...) _MWLog(ASL_LEVEL_INFO, __VA_ARGS__)
 #else
 #define MWLogInfo(...)
 #endif
-
+ 
 #if MW_COMPILE_TIME_LOG_LEVEL >= ASL_LEVEL_DEBUG
-void MWLogDebug(NSString *format, ...);
+#define MWLogDebug(...) _MWLog(ASL_LEVEL_DEBUG, __VA_ARGS__)
 #else
 #define MWLogDebug(...)
 #endif
-
