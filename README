@@ -3,3 +3,10 @@ MWLogging - simple wrapper macros around the ASL (Apple System Log).
 See the blog post:
 
 http://doing-it-wrong.mikeweller.com/2012/07/youre-doing-it-wrong-1-nslogdebug-ios.html
+
+---
+
+Changes：
+
+1. 用宏替代了原先的函数声明
+2. -fno-objc-arc support

@@ -17,5 +17,8 @@ void _MWLog(int LEVEL, NSString *format, ...)
 	va_start(args, format);
 	NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
 	asl_log(NULL, NULL, (LEVEL), "%s", [message UTF8String]);
+#if !__has_feature(objc_arc)
+	[message release];
+#endif
 	va_end(args);
 }
