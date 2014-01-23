@@ -10,3 +10,4 @@ Changes：
 
 1. 用宏替代了原先的函数声明
 2. -fno-objc-arc support
+3. 增加日志本地保存
